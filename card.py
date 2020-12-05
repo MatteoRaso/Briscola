@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-class card(briscola):
+class card():
     def _init_(self):
         self.suit = ''
         self.is_briscola = False
