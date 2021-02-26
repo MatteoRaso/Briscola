@@ -7,7 +7,7 @@ from briscola_game import *
 
 num_of_games = 200
 
-def presquilla_battle(player_1, player_2):
+def briscola_battle(player_1, player_2):
     #Half will be with player_1 going first
     for i in range(0, num_of_games / 2):
         briscola_game(player_1, player_2)
