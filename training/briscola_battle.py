@@ -9,8 +9,8 @@ num_of_games = 200
 
 def briscola_battle(player_1, player_2):
     #Half will be with player_1 going first
-    for i in range(0, num_of_games / 2):
+    for i in range(0, num_of_games // 2):
         briscola_game(player_1, player_2)
 
-    for i in range(0, num_of_games / 2):
+    for i in range(0, num_of_games // 2):
         briscola_game(player_2, player_1)
