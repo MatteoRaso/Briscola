@@ -10,7 +10,7 @@ def better_card(card_1, card_2, player_1, player_2, briscola):
     player_1.best = False
     player_2.best = False
 
-    if card_1.suit == briscola and card_2.suit == briscola:
+    if card_1.suit == card_2.suit:
         if card_1.points > card_2.points:
             player_1.points += total_points
             player_1.best = True
@@ -19,15 +19,12 @@ def better_card(card_1, card_2, player_1, player_2, briscola):
             player_2.points += total_points
             player_2.best = True
 
-    elif card_1.suit != card_2.suit:
-        player_1.points += total_points
-        player_1.best = True
-
-    elif card_1.points > card_2.points:
+    elif card_1.suit == briscola:
         player_1.points += total_points
         player_1.best = True
 
     else:
+        #Card 2 is a briscola
         player_2.points += total_points
         player_2.best = True
 
