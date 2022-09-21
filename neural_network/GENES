@@ -1,0 +1,9 @@
+There are certain attributes that affect which card a bot chooses. We can represent these 
+attributes as genes and use the gene to determine how much it affects the bot's choice.
+
+Attributes:
+Risk-taking behaviour
+Willingness to preserve a card for later use
+How much its current score affects it
+How much the cards that have already been played affect it
+
