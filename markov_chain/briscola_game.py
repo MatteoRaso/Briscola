@@ -8,12 +8,13 @@ import numpy as np
 def briscola_game(player_1, player_2):
     index = np.random.randint(0, 4)
     briscola = ['B', 'C', 'D', 'S'][index]
-    shuffle(deck)
-    deal_deck(player_1, player_2)
+    np.random.shuffle(deck)
+    player_1.hand = deck[0:3]
+    player_2.hand = deck[3:6]
     player_1.points = 0
     player_2.points = 0
-    card_1 = player_1.play_card()
-    card_2 = player_2.play_card()
+    card_1 = player_1.play_card(player_2)
+    card_2 = player_2.play_card(player_1)
 
     player_1, player_2 = better_card(card_1, card_2, player_1, player_2)
 
@@ -33,6 +34,8 @@ def briscola_game(player_1, player_2):
             deck.remove(0)
             player_2, player_1 = better_card(card_1, card_2, player_2, player_1)
 
-    #There are 120 points in a deck,
-    player_1.fitness += player_1.points / 120
-    player_2.fitness += player_2.points / 120
+    if player_1.points >= player_2.points:
+        player_1.wins += 1
+
+    else:
+        player_2.wins += 1
