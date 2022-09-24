@@ -23,16 +23,16 @@ def briscola_game(player_1, player_2):
         #In Briscola, whoever has the best card draws and plays first.
         if player_1.best:
             player_1.hand.append(playing_deck[0])
-            playing_deck.remove(0)
+            playing_deck.pop(0)
             player_2.hand.append(playing_deck[0])
-            playing_deck.remove(0)
+            playing_deck.pop(0)
             player_1, player_2 = better_card(card_1, card_2, player_1, player_2, briscola)
 
         else:
             player_2.hand.append(playing_deck[0])
-            playing_deck.remove(0)
+            playing_deck.pop(0)
             player_1.hand.append(playing_deck[0])
-            playing_deck.remove(0)
+            playing_deck.pop(0)
             player_2, player_1 = better_card(card_1, card_2, player_2, player_1, briscola)
 
     if player_1.points >= player_2.points:
