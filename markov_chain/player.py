@@ -176,7 +176,11 @@ class player():
                     possible_hands.append(card)
 
             possible_hands.sort(key = lambda x: x.points, reverse = True)
-            played_card = possible_hands[1]
+            if len(possible_hands) > 1:
+                played_card = possible_hands[1]
+
+            else:
+                played_card = possible_hands[0]
 
         elif action == 2:
             possible_hands = []
@@ -194,6 +198,10 @@ class player():
                     possible_hands.append(card)
 
             possible_hands.sort(key = lambda x: x.points, reverse = True)
-            played_card = possible_hands[1]
+            if len(possible_hands) > 1:
+                played_card = possible_hands[1]
+
+            else:
+                played_card = possible_hands[0]
 
         return played_card
