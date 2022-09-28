@@ -11,7 +11,7 @@ def deck(briscola):
         for lines in csv_file:
             new_card = card()
             new_card.suit = lines[0]
-            new_card.value = int(lines[1])
+            new_card.value = lines[1]
             new_card.points = int(lines[2])
             new_card.index = int(lines[3])
             new_card.set_briscola(briscola)
