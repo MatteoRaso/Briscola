@@ -38,7 +38,8 @@ class player():
 
     def policy_1_update(self, state):
         policy_guess = -1
-        best_score = 0
+        best_score = -1e30
+        best_answer = -1
         for action in [0, 1]:
             score = 0
             #Since you can only score 22 points in a single hand,
@@ -54,11 +55,12 @@ class player():
                 best_score = score
                 best_answer = action
 
-        self.policy_1[state] = policy_guess
+        self.policy_1[state] = best_answer
 
     def policy_2_update(self, state):
         policy_guess = -1
-        best_score = 0
+        best_score = -1e30
+        best_answer = -1
         for action in [0, 1, 2]:
             score = 0
             for new_state in range(max(0, state - 23), min(241, state + 23)):
@@ -68,11 +70,12 @@ class player():
                 best_score = score
                 best_answer = action
 
-        self.policy_2[state] = policy_guess
+        self.policy_2[state] = best_answer
 
     def policy_3_update(self, state):
         policy_guess = -1
-        best_score = 0
+        best_score = -1e30
+        best_answer = -1
         for action in [0, 2, 3]:
             score = 0
             for new_state in range(max(0, state - 23), min(241, state + 23)):
@@ -82,11 +85,12 @@ class player():
                 best_score = score
                 best_answer = action
 
-        self.policy_3[state] = policy_guess
+        self.policy_3[state] = best_answer
 
     def policy_4_update(self, state):
         policy_guess = -1
-        best_score = 0
+        best_score = -1e30
+        best_answer = -1
         for action in [2, 3]:
             score = 0
             for new_state in range(max(0, state - 23), min(241, state + 23)):
@@ -96,7 +100,7 @@ class player():
                 best_score = score
                 best_answer = action
 
-        self.policy_4[state] = policy_guess
+        self.policy_4[state] = best_answer
 
     def value_1_update(self, state):
         action = self.policy_1[state]
@@ -150,6 +154,7 @@ class player():
         state = int(self.points - opponent.points)
         if self.hand[0].suit == "B" and self.hand[1].suit == "B" and self.hand[2].suit == "B":
             action = self.policy_1[state]
+            print(action)
 
         elif (self.hand[0].suit == "B" and self.hand[1].suit == "B") or (self.hand[0].suit == "B" and self.hand[2].suit == "B") or (self.hand[1].suit == "B" and self.hand[2].suit == "B"):
             action = self.policy_2[state]
