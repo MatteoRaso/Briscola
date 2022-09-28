@@ -19,6 +19,7 @@ class player():
         self.policy_3 = {0: 0}
         self.value_4 = {0: 0}
         self.policy_4 = {0: 0}
+        self.training_iterations = 0
         self.gamma = 0
 
     def reward(self, state_i, state_j):
@@ -135,7 +136,7 @@ class player():
         self.value_4[state] = new_value
 
     def train(self):
-        for i in range(0, 300000):
+        for i in range(0, self.training_iterations):
             state = np.random.randint(0, 241)
             self.value_1_update(state)
             self.policy_1_update(state)
