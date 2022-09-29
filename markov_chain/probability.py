@@ -9,7 +9,7 @@ from deck import *
 #different actions that we can take. This comes to
 #4 different transition matrices.
 #State i is when the point difference is
-#i - 120, where -120 < i < 120.
+#i + 120, where -120 < i < 120.
 
 
 #It doesn't matter what suit we use here.
