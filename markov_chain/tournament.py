@@ -20,4 +20,7 @@ for i in range(0, len(players)):
 
 players.sort(key = lambda x: x.wins, reverse = True)
 print("The best gamma value is " + str(players[0].gamma))
+for i in range(0, len(players)):
+    print("Player with gamma " + str(players[i].gamma) + " had " + str(players[i].wins) + " wins.")
+
 np.save("players.npy", players)
