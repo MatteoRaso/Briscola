@@ -152,7 +152,7 @@ class player():
                 print(i)
 
     def play_card(self, opponent):
-        state = int(self.points - opponent.points)
+        state = int(120 + self.points - opponent.points)
         if self.hand[0].suit == "B" and self.hand[1].suit == "B" and self.hand[2].suit == "B":
             action = self.policy_1[state]
             print(action)
