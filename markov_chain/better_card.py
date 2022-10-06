@@ -1,3 +1,13 @@
+"""
+This file is part of Briscola.
+
+Briscola is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+Briscola is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with Briscola. If not, see <https://www.gnu.org/licenses/>. 
+"""
+
 #!/usr/bin/python
 #When two players play their card, this function is called to determine who wins.
 #player_1 is the one that plays first.

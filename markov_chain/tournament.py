@@ -4,11 +4,11 @@ from briscola_game import *
 
 players = []
 
-for i in range(1, 100):
+for i in range(1, 20):
     players.append(player())
     players[i - 1]._init_()
     players[i - 1].initialize_policy_and_value()
-    players[i - 1].gamma = 0.01 * i
+    players[i - 1].gamma = 0.05 * i
     players[i - 1].training_iterations = 300000
     players[i - 1].train()
 
