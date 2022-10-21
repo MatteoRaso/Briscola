@@ -40,8 +40,10 @@ assert G.innovation_number == 3
 assert [node_2, node_4, 1, 2] in O.connection_genes
 assert [node_4, node_3, 1, 3] in O.connection_genes
 assert len(O.connection_genes) >= 2
+assert O.total_weight > 0.5
 
 w = O.connection_genes[0][2]
 
 O.mutate_weight(0)
 assert w != O.connection_genes[0][2]
+assert O.total_weight > w
