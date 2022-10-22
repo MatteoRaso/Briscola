@@ -26,9 +26,15 @@ class species():
 
         self.average_adjusted_fitness /= len(self.members)
 
+    def sort_by_adjusted_fitness(self):
+        self.members.sort(key = lambda x: x.adjusted_fitness, reverse = True)
+
     def breed(self, member_1, member_2, generation):
         child = organism()
         child._init_()
+        child.add_name()
+        child.mother = member_1.name
+        child.father = member_2.name
         #Matching genes should have the same innovation number.
         member_1.connection_genes.sort(key = lambda x: x[-1])
         member_2.connection_genes.sort(key = lambda x: x[-1])

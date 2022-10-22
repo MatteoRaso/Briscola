@@ -55,3 +55,7 @@ S.members[1].connection_genes = [[node_1, node_2, 1, G.innovation_number],
 
 S.breed(S.members[0], S.members[1], G)
 assert len(S.members[-1].connection_genes) == 3
+
+S.members[1].adjusted_fitness = 2
+S.sort_by_adjusted_fitness()
+assert S.members[0].adjusted_fitness == 2
