@@ -45,6 +45,6 @@ a player class to play Briscola with Markov decision processes.
 - Add interface to play against the AI
 - Add neural network
 
-#License
+# License
 
 This repo is licensed under the GPL 3.
