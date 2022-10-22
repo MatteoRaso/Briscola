@@ -1,6 +1,8 @@
 #A class for neural networks, which will
 #be evolved by using the NEAT algorithm.
 import numpy as np
+import string
+import random
 from activation_functions import *
 from node import *
 
@@ -13,6 +15,9 @@ class organism():
         self.hidden_nodes = []
         self.input_nodes = []
         self.output_nodes = []
+        self.mother = ""
+        self.father = ""
+        self.name = ""
         self.excess_genes = 0
         self.total_weight = 0
         self.add_node_chance = 0.05
@@ -21,6 +26,9 @@ class organism():
         self.mutate_activation_chance = 0.05
         self.fitness = 0
         self.adjusted_fitness = 0
+
+    def add_name(self):
+         self.name = ''.join(random.choices(string.ascii_letters, k = 52))
 
     def add_connection(self, node_1, node_2, gen):
         y = [node_1, node_2, np.random.random(), gen.innovation_number]
