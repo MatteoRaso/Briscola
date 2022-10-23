@@ -4,6 +4,7 @@ class species():
     def _init_(self):
         self.average_adjusted_fitness = 0
         self.members = []
+        self.reference_member = None
         self.allowed_members = 0
 
     def purge(self):
