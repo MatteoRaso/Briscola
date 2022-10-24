@@ -35,6 +35,7 @@ class organism():
         if gen.new_innovation(y):
             y[-1] += 1
             gen.innovation_number += 1
+            gen.innovations.append(y[0], y[1])
 
         self.total_weight += y[2]
         node_2.incoming.append(y)
@@ -49,12 +50,14 @@ class organism():
         if gen.new_innovation(connection_1):
             connection_1[-1] += 1
             gen.innovation_number += 1
+            gen.innovations.append([connection_1[0], connection_1[1]])
 
         connection_2 = [new_node, connection[1], connection[2], gen.innovation_number]
 
         if gen.new_innovation(connection_2):
             connection_2[-1] += 1
             gen.innovation_number += 1
+            gen.innovations.append([connection_2[0], connection_2[1]])
 
         new_node.incoming.append(connection[0])
         connection[1].incoming.append(new_node)
