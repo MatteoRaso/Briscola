@@ -8,7 +8,7 @@ class node():
         self.activation_function = lambda x: x
 
     def get_value(self):
-        if len(self.incoming) == 0:
+        if len(self.incoming) == 0 or self.value != 0:
             return self.value
 
         else:
