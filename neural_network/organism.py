@@ -43,8 +43,16 @@ class organism():
         self.connection_genes.append(y)
 
     def add_node(self, new_node, connection, gen):
+        length = len(connection[1].incoming)
+        for i in range(0, len(connection[1].incoming) - 1):
+            if connection[0] == connection[1].incoming[i][0]:
+                connection[1].incoming.remove(connection[1].incoming[i])
+
+        #Kills the function without causing any changes.
+        if len(connection[1].incoming) == length:
+            return
+
         self.connection_genes.remove(connection)
-        connection[1].incoming.remove(connection)
         connection_1 = [connection[0], new_node, 1, gen.innovation_number]
         self.total_weight += 1
 
