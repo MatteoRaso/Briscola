@@ -18,6 +18,7 @@ class organism():
         self.mother = ""
         self.father = ""
         self.name = ""
+        self.hand = []
         self.excess_genes = 0
         self.total_weight = 0
         self.add_node_chance = 0.05
