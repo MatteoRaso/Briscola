@@ -60,8 +60,8 @@ class organism():
             gen.innovation_number += 1
             gen.innovations.append([connection_2[0], connection_2[1]])
 
-        new_node.incoming.append(connection[0])
-        connection[1].incoming.append(new_node)
+        new_node.incoming.append(connection_1)
+        connection[1].incoming.append(connection_2)
         self.connection_genes.append(connection_1)
         self.connection_genes.append(connection_2)
         self.hidden_nodes.append(new_node)
