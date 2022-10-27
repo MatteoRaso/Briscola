@@ -12,7 +12,7 @@ You should have received a copy of the GNU General Public License along with Bri
 from card import *
 import csv
 
-def deck(briscola):
+def deck():
     new_deck = []
     with open("every_card.csv", mode ='r') as file:
         csv_file = csv.reader(file)
@@ -23,7 +23,6 @@ def deck(briscola):
             new_card.value = lines[1]
             new_card.points = int(lines[2])
             new_card.index = int(lines[3])
-            new_card.set_briscola(briscola)
 
             new_deck.append(new_card)
 
