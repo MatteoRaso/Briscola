@@ -86,3 +86,10 @@ class organism():
     def get_total_weight(self):
         for gene in self.connection_genes:
             self.total_weight += gene[2]
+
+    def clear_nodes(self):
+        for i in range(0, len(self.hidden_nodes)):
+            self.hidden_nodes[i].value = 0
+
+        for i in range(0, len(self.output_nodes)):
+            self.output_nodes[i].value = 0
