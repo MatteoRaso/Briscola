@@ -17,13 +17,62 @@ def decision(output_nodes, hand, briscola):
     else:
         action = 3
 
-    #Network may have chosen an illegal action, so we need
-    #to change the action to one that doesn't cause problems.
-    if action == 0:
-        if (hand[0].suit != briscola and hand[1].suit != briscola and hand[2].suit != briscola):
-            action = 2
+    if len(hand) >= 3:
+        #Network may have chosen an illegal action, so we need
+        #to change the action to one that doesn't cause problems.
+        if action == 0:
+            if (hand[0].suit != briscola and hand[1].suit != briscola and hand[2].suit != briscola):
+                action = 2
 
-        else:
+            else:
+                possible_hands = []
+                for card in hand:
+                    if card.suit == briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+                played_card = possible_hands[0]
+
+        if action == 1:
+            if (hand[0].suit != briscola and hand[1].suit != briscola and hand[2].suit != briscola):
+                action = 2
+
+            else:
+                possible_hands = []
+                for card in hand:
+                    if card.suit == briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+                played_card = possible_hands[-1]
+
+        if action == 2:
+            if (hand[0].suit == briscola and hand[1].suit == briscola and hand[2].suit == briscola):
+                action = 0
+
+            else:
+                possible_hands = []
+                for card in hand:
+                    if card.suit != briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+                played_card = possible_hands[0]
+
+        if action == 3:
+            if (hand[0].suit == briscola and hand[1].suit == briscola and hand[2].suit == briscola):
+                action = 0
+
+            else:
+                possible_hands = []
+                for card in hand:
+                    if card.suit != briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+                played_card = possible_hands[-1]
+
+        if action == 0:
             possible_hands = []
             for card in hand:
                 if card.suit == briscola:
@@ -32,52 +81,69 @@ def decision(output_nodes, hand, briscola):
             possible_hands.sort(key = lambda x: x.points, reverse = True)
             played_card = possible_hands[0]
 
-    if action == 1:
-        if (hand[0].suit != briscola and hand[1].suit != briscola and hand[2].suit != briscola):
-            action = 2
+    elif len(hand) == 2:
+        if action == 0:
+            if (hand[0].suit != briscola and hand[1].suit != briscola):
+                action = 2
 
-        else:
+            else:
+                possible_hands = []
+                for card in hand:
+                    if card.suit == briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+                played_card = possible_hands[0]
+
+        if action == 1:
+            if (hand[0].suit != briscola and hand[1].suit != briscola):
+                action = 2
+
+            else:
+                possible_hands = []
+                for card in hand:
+                    if card.suit == briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+                played_card = possible_hands[1]
+
+        if action == 2:
+            if (hand[0].suit == briscola and hand[1].suit == briscola):
+                action = 0
+
+            else:
+                possible_hands = []
+                for card in hand:
+                    if card.suit != briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+                played_card = possible_hands[0]
+
+        if action == 3:
+            if (hand[0].suit == briscola and hand[1].suit == briscola):
+                action = 0
+
+            else:
+                possible_hands = []
+                for card in hand:
+                    if card.suit != briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+                played_card = possible_hands[1]
+
+        if action == 0:
             possible_hands = []
             for card in hand:
                 if card.suit == briscola:
                     possible_hands.append(card)
 
             possible_hands.sort(key = lambda x: x.points, reverse = True)
-            played_card = possible_hands[1]
-
-    if action == 2:
-        if (hand[0].suit == briscola and hand[1].suit == briscola and hand[2].suit == briscola):
-            action = 0
-
-        else:
-            possible_hands = []
-            for card in hand:
-                if card.suit != briscola:
-                    possible_hands.append(card)
-
-            possible_hands.sort(key = lambda x: x.points, reverse = True)
             played_card = possible_hands[0]
 
-    if action == 3:
-        if (hand[0].suit == briscola and hand[1].suit == briscola and hand[2].suit == briscola):
-            action = 0
-
-        else:
-            possible_hands = []
-            for card in hand:
-                if card.suit != briscola:
-                    possible_hands.append(card)
-
-            possible_hands.sort(key = lambda x: x.points, reverse = True)
-            played_card = possible_hands[1]
-
-    if action == 0:
-        possible_hands = []
-        for card in hand:
-            if card.suit == briscola:
-                possible_hands.append(card)
-
-        possible_hands.sort(key = lambda x: x.points, reverse = True)
-        played_card = possible_hands[0]
+    else:
+        played_card = hand[0]
 
     return played_card
