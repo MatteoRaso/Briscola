@@ -73,8 +73,8 @@ class generation():
             s.allowed_members = int(self.total_members * s.average_adjusted_fitness / total_fitness)
 
     def new_innovation(self, connection):
-        for inno in self.innovations:
-            if connection[0] == inno[0] and connection[1] == inno[1]:
-                return False
+        trunacated_connection = [connection[0], connection[1]]
+        if trunacated_connection in self.innovations:
+            return False
 
         return True
