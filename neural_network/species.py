@@ -33,6 +33,8 @@ class species():
     def breed(self, member_1, member_2, generation):
         child = organism()
         child._init_()
+        child.input_nodes = member_1.input_nodes.copy()
+        child.output_nodes = member_1.output_nodes.copy()
         child.add_name()
         child.mother = member_1.name
         child.father = member_2.name
@@ -44,10 +46,19 @@ class species():
             if member_1.connection_genes[i][-1] == member_2.connection_genes[i][-1]:
                 if np.random.random() < 0.5:
                     child.connection_genes.append(member_1.connection_genes[i])
+                    if member_1.connection_genes[i][0] not in child.input_nodes or member_1.connection_genes[i][0] not in child.output_nodes:
+                        child.hidden_nodes.append(member_1.connection_genes[i][0])
+
+                    if member_1.connection_genes[i][1] not in child.input_nodes or member_1.connection_genes[i][1] not in child.output_nodes:
+                        child.hidden_nodes.append(member_1.connection_genes[i][1])
 
                 else:
                     child.connection_genes.append(member_2.connection_genes[i])
+                    if member_2.connection_genes[i][0] not in child.input_nodes or member_2.connection_genes[i][0] not in child.output_nodes:
+                        child.hidden_nodes.append(member_2.connection_genes[i][0])
 
+                    if member_2.connection_genes[i][1] not in child.input_nodes or member_2.connection_genes[i][1] not in child.output_nodes:
+                        child.hidden_nodes.append(member_2.connection_genes[i][1])
             else:
                 break
 
@@ -56,11 +67,22 @@ class species():
             for i in range(0, len(member_1.connection_genes) - len(member_2.connection_genes)):
                 if np.random.random() < 0.5:
                     child.connection_genes.append(member_1.connection_genes[i])
+                    if member_1.connection_genes[i][0] not in child.input_nodes or member_1.connection_genes[i][0] not in child.output_nodes:
+                        child.hidden_nodes.append(member_1.connection_genes[i][0])
+
+                    if member_1.connection_genes[i][1] not in child.input_nodes or member_1.connection_genes[i][1] not in child.output_nodes:
+                        child.hidden_nodes.append(member_1.connection_genes[i][1])
 
         elif len(member_2.connection_genes) > len(member_1.connection_genes) and member_2.fitness > member_1.fitness:
             for i in range(0, len(member_2.connection_genes) - len(member_1.connection_genes)):
                 if np.random.random() < 0.5:
                     child.connection_genes.append(member_2.connection_genes[i])
+                    if member_2.connection_genes[i][0] not in child.input_nodes or member_2.connection_genes[i][0] not in child.output_nodes:
+                        child.hidden_nodes.append(member_2.connection_genes[i][0])
+
+                    if member_2.connection_genes[i][1] not in child.input_nodes or member_2.connection_genes[i][1] not in child.output_nodes:
+                        child.hidden_nodes.append(member_2.connection_genes[i][1])
+
 
         if np.random.random() < child.add_node_chance:
             new_node = node()
