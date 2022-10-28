@@ -1,11 +1,11 @@
 import numpy as np
-
+from activation_functions import linear
 class node():
     def _init_(self):
         self.ID = 0
         self.value = 0
         self.incoming = []
-        self.activation_function = lambda x: x
+        self.activation_function = linear
 
     def get_value(self):
         if len(self.incoming) == 0 or self.value != 0:
