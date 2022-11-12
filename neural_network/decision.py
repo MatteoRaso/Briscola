@@ -106,7 +106,7 @@ def decision(output_nodes, hand, briscola):
                         possible_hands.append(card)
 
                 possible_hands.sort(key = lambda x: x.points, reverse = True)
-                played_card = possible_hands[1]
+                played_card = possible_hands[-1]
 
         if action == 2:
             if (hand[0].suit == briscola and hand[1].suit == briscola):
