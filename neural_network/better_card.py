@@ -7,34 +7,20 @@ Briscola is distributed in the hope that it will be useful, but WITHOUT ANY WARR
 
 You should have received a copy of the GNU General Public License along with Briscola. If not, see <https://www.gnu.org/licenses/>.
 """
-#!/usr/bin/python
-#When two players play their card, this function is called to determine who wins.
-#player_1 is the one that plays first.
-#The reason that we have a 'best' attribute is because whoever has the best card
-#gets to draw and play first for the next card.
-def better_card(card_1, card_2, player_1, player_2, briscola):
+def better_card(card_1, card_2, briscola):
 
     total_points = card_1.points + card_2.points
 
-    player_1.best = False
-    player_2.best = False
-
     if card_1.suit == card_2.suit:
-        if card_1.points > card_2.points:
-            player_1.points += total_points
-            player_1.best = True
+        if card_1.points >= card_2.points:
+            return total_points
 
         else:
-            player_2.points += total_points
-            player_2.best = True
+            #Negative output will mean that the
+            #second player takes the points.
+            return -total_points
 
-    elif card_1.suit == briscola:
-        player_1.points += total_points
-        player_1.best = True
+    elif card_2.suit == briscola:
+        return -total_points
 
-    else:
-        #Card 2 is a briscola
-        player_2.points += total_points
-        player_2.best = True
-
-    return player_1, player_2
+    return total_points
