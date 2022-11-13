@@ -147,8 +147,10 @@ for i in range(0, num_of_simulations):
 #5.19% for action 1, 39.7% for action 2 and
 #35.2% for action 3.
 print(times_action_was_chosen)
-#Normalizes the results so that the sum of each transition matrix is 1
+#Normalizes the results so that the sum of each row is 1
 for i in range(0, 4):
-    probability_array[i] = probability_array[i] / times_action_was_chosen[i]
+    probability_array[i] = (probability_array[i].T / np.sum(probability_array[i], 1).T).T
+    for j in range(0, len(probability_array[i])):
+        assert abs(sum(probability_array[i][j]) - 1) < 1e-3
 
 np.save("probability.npy", probability_array)
