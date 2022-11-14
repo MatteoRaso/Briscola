@@ -100,13 +100,13 @@ while True:
 
     G.species = species_copy.copy()
     G.assign_allowed_members()
+    G.create_new_species()
     for s in G.species:
         while len(s.members) < s.allowed_members:
             mom = s.members[np.random.randint(0, len(s.members))]
             dad = s.members[np.random.randint(0, len(s.members))]
             s.breed(mom, dad, G)
 
-    G.create_new_species()
     s = G.species[np.random.randint(0, len(G.species))]
     m = s.members[np.random.randint(0, len(s.members))]
 
