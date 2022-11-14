@@ -5,8 +5,8 @@ print("Initializing...")
 
 G = generation()
 G._init_()
-G.total_members = 300
-num_games = 200
+G.total_members = 200
+num_games = 150
 
 S = species()
 S._init_()
@@ -81,6 +81,10 @@ eval_array = [R]
 counter = 0
 
 while True:
+    if len(G.species) > 1:
+        G.total_members = 300
+        num_games = 200
+
     for s in G.species:
         for i in range(0, len(s.members)):
             for j in range(0, len(s.members)):
