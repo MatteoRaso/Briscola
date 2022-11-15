@@ -1,21 +1,38 @@
 #The function that the output of the network will get
 #pumped to. This function will decide which card is played.
 
-def decision(output_nodes, hand, briscola):
-    values = [output_nodes[0].value, output_nodes[1].value,
-              output_nodes[2].value, output_nodes[3].value]
+def decision(output_nodes, hand, briscola, first):
+    if first:
+        values = [output_nodes[0].value_1, output_nodes[1].value_1,
+                  output_nodes[2].value_1, output_nodes[3].value_1]
 
-    if max(values) == output_nodes[0].value:
-        action = 0
+        if max(values) == output_nodes[0].value_1:
+            action = 0
 
-    elif max(values) == output_nodes[1].value:
-        action = 1
+        elif max(values) == output_nodes[1].value_1:
+            action = 1
 
-    elif max(values) == output_nodes[2].value:
-        action = 2
+        elif max(values) == output_nodes[2].value_1:
+            action = 2
+
+        else:
+            action = 3
 
     else:
-        action = 3
+        values = [output_nodes[0].value_2, output_nodes[1].value_2,
+                  output_nodes[2].value_2, output_nodes[3].value_2]
+
+        if max(values) == output_nodes[0].value_2:
+            action = 0
+
+        elif max(values) == output_nodes[1].value_2:
+            action = 1
+
+        elif max(values) == output_nodes[2].value_2:
+            action = 2
+
+        else:
+            action = 3
 
     if len(hand) >= 3:
         #Network may have chosen an illegal action, so we need
