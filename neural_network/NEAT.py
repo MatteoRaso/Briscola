@@ -33,12 +33,16 @@ for i in range(0, 45):
     N._init_()
     R.input_nodes.append(N)
     R.connection_genes.append([R.input_nodes[-1], R.output_nodes[0], np.random.random(), G.innovation_number])
+    G.innovation_number += 1
     R.output_nodes[0].incoming.append(R.connection_genes[-1])
     R.connection_genes.append([R.input_nodes[-1], R.output_nodes[1], np.random.random(), G.innovation_number])
+    G.innovation_number += 1
     R.output_nodes[1].incoming.append(R.connection_genes[-1])
     R.connection_genes.append([R.input_nodes[-1], R.output_nodes[2], np.random.random(), G.innovation_number])
+    G.innovation_number += 1
     R.output_nodes[2].incoming.append(R.connection_genes[-1])
     R.connection_genes.append([R.input_nodes[-1], R.output_nodes[3], np.random.random(), G.innovation_number])
+    G.innovation_number += 1
     R.output_nodes[3].incoming.append(R.connection_genes[-1])
 
 S.reference_member = R
