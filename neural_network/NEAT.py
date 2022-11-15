@@ -7,6 +7,8 @@ G = generation()
 G._init_()
 G.total_members = 200
 num_games = 150
+batch = True
+batch_size = 10
 
 S = species()
 S._init_()
@@ -85,12 +87,25 @@ while True:
         G.total_members = 300
         num_games = 200
 
-    for s in G.species:
-        for i in range(0, len(s.members)):
-            for j in range(0, len(s.members)):
-                if i != j:
-                    for k in range(0, num_games  // 2):
-                        briscola_game(s.members[i], s.members[j])
+    if batch:
+        for s in G.species:
+            for i in range(0, len(s.members)):
+                new_array = s.members.copy()
+                new_array.remove(s.members[i])
+                opponents = np.random.choice(new_array, 10, False)
+                for j in range(0, len(opponents)):
+                    if i != j:
+                        for k in range(0, num_games // 2):
+                            briscola_game(s.members[i], opponents[j])
+                            briscola_game(opponents[j], s.members[i])
+
+    else:
+        for s in G.species:
+            for i in range(0, len(s.members)):
+                for j in range(0, len(s.members)):
+                    if i != j:
+                        for k in range(0, num_games // 2):
+                            briscola_game(s.members[i], s.members[j])
 
     species_copy = G.species.copy()
     for s in G.species:
