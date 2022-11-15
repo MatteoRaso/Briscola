@@ -6,7 +6,7 @@ print("Initializing...")
 G = generation()
 G._init_()
 G.total_members = 200
-num_games = 150
+num_games = 100
 batch = True
 batch_size = 10
 
