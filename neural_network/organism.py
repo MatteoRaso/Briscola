@@ -32,6 +32,14 @@ class organism():
          self.name = ''.join(random.choices(string.ascii_letters, k = 52))
 
     def add_connection(self, node_1, node_2, gen):
+        #Makes sure that the nodes aren't already
+        #connected in the opposite direction.
+        #If this happens, we'll end up in a
+        #loop and get a RecursionError.
+        for gene in self.connection_genes:
+            if gene[0] == node_2 and gene[1] == node_1:
+                return
+
         y = [node_1, node_2, np.random.random(), gen.innovation_number]
         if gen.new_innovation(y):
             y[-1] += 1
