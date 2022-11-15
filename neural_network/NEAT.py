@@ -142,7 +142,7 @@ while True:
 
     eval_array[-1].fitness = 0
 
-    for i in range(0, num_games // 2):
+    for i in range(0, 500):
         try:
             briscola_game(eval_array[-1], new_eval_member)
             briscola_game(new_eval_member, eval_array[-1])
