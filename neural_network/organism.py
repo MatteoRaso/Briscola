@@ -105,7 +105,9 @@ class organism():
 
     def clear_nodes(self):
         for i in range(0, len(self.hidden_nodes)):
-            self.hidden_nodes[i].value = 0
+            self.hidden_nodes[i].value_1 = 0
+            self.hidden_nodes[i].value_2 = 0
 
         for i in range(0, len(self.output_nodes)):
-            self.output_nodes[i].value = 0
+            self.output_nodes[i].value_1 = 0
+            self.output_nodes[i].value_2 = 0

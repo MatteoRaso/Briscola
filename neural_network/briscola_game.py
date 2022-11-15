@@ -19,46 +19,48 @@ def briscola_game(player_1, player_2):
     player_2.clear_nodes()
     player_1_best = False
     for i in range(0, len(player_1.input_nodes)):
-        player_1.input_nodes[i].value = 0
-        player_2.input_nodes[i].value = 0
+        player_1.input_nodes[i].value_1 = 0
+        player_2.input_nodes[i].value_1 = 0
+        player_1.input_nodes[i].value_2 = 0
+        player_2.input_nodes[i].value_2 = 0
 
     briscola_dict = {"B": 40, "C": 41, "D": 42, "S": 43}
     playing_deck = deck()
     np.random.shuffle(playing_deck)
     revealed_card = playing_deck[0]
     #Letting the AI know which suit is the Briscola
-    player_1.input_nodes[revealed_card.index].value = 2
-    player_2.input_nodes[revealed_card.index].value = 2
-    player_1.input_nodes[briscola_dict[revealed_card.suit]].value = 1
-    player_2.input_nodes[briscola_dict[revealed_card.suit]].value = 1
+    player_1.input_nodes[revealed_card.index].value_1 = 2
+    player_2.input_nodes[revealed_card.index].value_2 = 2
+    player_1.input_nodes[briscola_dict[revealed_card.suit]].value_1 = 1
+    player_2.input_nodes[briscola_dict[revealed_card.suit]].value_2 = 1
     player_1.hand = playing_deck[1:4]
     player_2.hand = playing_deck[4:7]
     for i in range(0, 3):
-        player_1.input_nodes[player_1.hand[i].index].value = 1
-        player_2.input_nodes[player_2.hand[i].index].value = 1
+        player_1.input_nodes[player_1.hand[i].index].value_1 = 1
+        player_2.input_nodes[player_2.hand[i].index].value_2 = 1
 
     for i in range(0, 4):
-        player_1.output_nodes[i].get_value()
-        player_2.output_nodes[i].get_value()
+        player_1.output_nodes[i].get_value_1()
+        player_2.output_nodes[i].get_value_2()
 
-    card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit)
-    player_1.input_nodes[card_1.index].value = -1
-    player_2.input_nodes[card_1.index].value = -1
+    card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit, True)
+    player_1.input_nodes[card_1.index].value_1 = -1
+    player_2.input_nodes[card_1.index].value_2 = -1
     for i in range(0, 4):
-        player_2.output_nodes[i].get_value()
+        player_2.output_nodes[i].get_value_2()
 
-    card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit)
-    player_1.input_nodes[card_2.index].value = -1
-    player_2.input_nodes[card_2.index].value = -1
+    card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit, False)
+    player_1.input_nodes[card_2.index].value_1 = -1
+    player_2.input_nodes[card_2.index].value_2 = -1
     del playing_deck[0:7]
     points = better_card(card_1, card_2, revealed_card.suit)
 
     if points > 0:
-        player_1.input_nodes[44].value += points
+        player_1.input_nodes[44].value_1 += points
         player_1_best = True
 
     elif points < 0:
-        player_2.input_nodes[44].value -= points
+        player_2.input_nodes[44].value_2 -= points
         player_1_best = False
 
     player_1.hand.remove(card_1)
@@ -70,47 +72,47 @@ def briscola_game(player_1, player_2):
         #In Briscola, whoever has the best card draws and plays first.
         if player_1_best:
             player_1.hand.append(playing_deck[0])
-            player_1.input_nodes[playing_deck[0].index].value = 1
+            player_1.input_nodes[playing_deck[0].index].value_1 = 1
             playing_deck.pop(0)
             player_2.hand.append(playing_deck[0])
-            player_2.input_nodes[playing_deck[0].index].value = 1
+            player_2.input_nodes[playing_deck[0].index].value_2 = 1
             playing_deck.pop(0)
 
             for i in range(0, 4):
-                player_1.output_nodes[i].get_value()
+                player_1.output_nodes[i].get_value_1()
 
-            card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit)
-            player_1.input_nodes[card_1.index].value = -1
-            player_2.input_nodes[card_1.index].value = -1
+            card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit, True)
+            player_1.input_nodes[card_1.index].value_1 = -1
+            player_2.input_nodes[card_1.index].value_2 = -1
 
             for i in range(0, 4):
-                player_2.output_nodes[i].get_value()
+                player_2.output_nodes[i].get_value_2()
 
-            card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit)
-            player_1.input_nodes[card_2.index].value = -1
-            player_2.input_nodes[card_2.index].value = -1
+            card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit, False)
+            player_1.input_nodes[card_2.index].value_1 = -1
+            player_2.input_nodes[card_2.index].value_2 = -1
 
         else:
             player_2.hand.append(playing_deck[0])
-            player_2.input_nodes[playing_deck[0].index].value = 1
+            player_2.input_nodes[playing_deck[0].index].value_2 = 1
             playing_deck.pop(0)
             player_1.hand.append(playing_deck[0])
-            player_1.input_nodes[playing_deck[0].index].value = 1
+            player_1.input_nodes[playing_deck[0].index].value_1 = 1
             playing_deck.pop(0)
 
             for i in range(0, 4):
-                player_2.output_nodes[i].get_value()
+                player_2.output_nodes[i].get_value_2()
 
-            card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit)
-            player_1.input_nodes[card_2.index].value = -1
-            player_2.input_nodes[card_2.index].value = -1
+            card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit, False)
+            player_1.input_nodes[card_2.index].value_1 = -1
+            player_2.input_nodes[card_2.index].value_2 = -1
 
             for i in range(0, 4):
-                player_1.output_nodes[i].get_value()
+                player_1.output_nodes[i].get_value_1()
 
-            card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit)
-            player_1.input_nodes[card_1.index].value = -1
-            player_2.input_nodes[card_1.index].value = -1
+            card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit, True)
+            player_1.input_nodes[card_1.index].value_1 = -1
+            player_2.input_nodes[card_1.index].value_2 = -1
 
         points = better_card(card_1, card_2, revealed_card.suit)
 
@@ -118,11 +120,11 @@ def briscola_game(player_1, player_2):
         player_2.hand.remove(card_2)
 
         if points > 0:
-            player_1.input_nodes[44].value += points
+            player_1.input_nodes[44].value_1 += points
             player_1_best = True
 
         elif points < 0:
-            player_2.input_nodes[44].value -= points
+            player_2.input_nodes[44].value_2 -= points
             player_1_best = False
 
     if player_1_best:
@@ -141,18 +143,18 @@ def briscola_game(player_1, player_2):
 
         if player_1_best:
             for j in range(0, 4):
-                player_1.output_nodes[i].get_value()
+                player_1.output_nodes[i].get_value_1()
 
-            card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit)
-            player_1.input_nodes[card_1.index].value = -1
-            player_2.input_nodes[card_1.index].value = -1
+            card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit, True)
+            player_1.input_nodes[card_1.index].value_1 = -1
+            player_2.input_nodes[card_1.index].value_2 = -1
 
             for j in range(0, 4):
-                player_2.output_nodes[i].get_value()
+                player_2.output_nodes[i].get_value_2()
 
-            card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit)
-            player_1.input_nodes[card_2.index].value = -1
-            player_2.input_nodes[card_2.index].value = -1
+            card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit, False)
+            player_1.input_nodes[card_2.index].value_1 = -1
+            player_2.input_nodes[card_2.index].value_2 = -1
             points = better_card(card_1, card_2, revealed_card.suit)
 
             player_1.hand.remove(card_1)
@@ -160,32 +162,32 @@ def briscola_game(player_1, player_2):
 
         else:
             for j in range(0, 4):
-                player_2.output_nodes[i].get_value()
+                player_2.output_nodes[i].get_value_2()
 
-            card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit)
-            player_1.input_nodes[card_2.index].value = -1
-            player_2.input_nodes[card_2.index].value = -1
+            card_2 = decision(player_2.output_nodes, player_2.hand, revealed_card.suit, False)
+            player_1.input_nodes[card_2.index].value_1 = -1
+            player_2.input_nodes[card_2.index].value_2 = -1
 
             for j in range(0, 4):
-                player_1.output_nodes[i].get_value()
+                player_1.output_nodes[i].get_value_1()
 
-            card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit)
-            player_1.input_nodes[card_1.index].value = -1
-            player_2.input_nodes[card_1.index].value = -1
+            card_1 = decision(player_1.output_nodes, player_1.hand, revealed_card.suit, True)
+            player_1.input_nodes[card_1.index].value_1 = -1
+            player_2.input_nodes[card_1.index].value_2 = -1
             points = better_card(card_1, card_2, revealed_card.suit)
 
             player_1.hand.remove(card_1)
             player_2.hand.remove(card_2)
 
         if points > 0:
-            player_1.input_nodes[44].value += points
+            player_1.input_nodes[44].value_1 += points
             player_1_best = True
 
         elif points < 0:
-            player_2.input_nodes[44].value -= points
+            player_2.input_nodes[44].value_2 -= points
             player_1_best = False
 
-    if player_1.input_nodes[44].value >= 60:
+    if player_1.input_nodes[44].value_1 >= 60:
         player_1.fitness += 1
 
     else:
