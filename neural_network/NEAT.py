@@ -5,10 +5,16 @@ print("Initializing...")
 
 G = generation()
 G._init_()
-G.total_members = 200
-num_games = 100
 batch = True
 batch_size = 10
+
+if not batch:
+    G.total_members = 200
+    num_games = 100
+
+else:
+    G.total_members = 300
+    num_games = 200
 
 S = species()
 S._init_()
@@ -87,7 +93,7 @@ eval_array = [R]
 counter = 0
 
 while True:
-    if len(G.species) > 1:
+    if not batch and (len(G.species) > 1):
         G.total_members = 300
         num_games = 200
 
