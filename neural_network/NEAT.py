@@ -152,11 +152,12 @@ while True:
             print(len(new_eval_member.input_nodes))
 
     eval_rating = new_eval_member.fitness / (eval_array[-1].fitness + new_eval_member.fitness)
-    eval_array.append(new_eval_member)
     print("The evaluation rating for generation " + str(counter) + " is " + str(eval_rating * 100) + "%.")
 
-    np.save("Generation_" + str(counter) + ".npy", np.array([G.species]))
-    if len(eval_array) % 10 == 0:
+    if eval_rating >= 0.99:
+        eval_array.append(new_eval_member)
         np.save("eval_array.npy", eval_array)
+
+    np.save("Generation_" + str(counter) + ".npy", np.array([G.species]))
 
     counter += 1
