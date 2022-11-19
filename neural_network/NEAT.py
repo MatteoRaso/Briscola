@@ -106,8 +106,12 @@ while True:
                 for j in range(0, len(opponents)):
                     if i != j:
                         for k in range(0, num_games // 2):
-                            briscola_game(s.members[i], opponents[j])
-                            briscola_game(opponents[j], s.members[i])
+                            try:
+                                briscola_game(s.members[i], opponents[j])
+                                briscola_game(opponents[j], s.members[i])
+
+                            except IndexError:
+                                pass
 
     else:
         for s in G.species:
@@ -115,7 +119,11 @@ while True:
                 for j in range(0, len(s.members)):
                     if i != j:
                         for k in range(0, num_games // 2):
-                            briscola_game(s.members[i], s.members[j])
+                            try:
+                                briscola_game(s.members[i], s.members[j])
+
+                            except IndexError:
+                                pass
 
     species_copy = G.species.copy()
     for s in G.species:

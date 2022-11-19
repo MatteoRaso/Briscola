@@ -149,7 +149,7 @@ def decision(output_nodes, hand, briscola, first):
                         possible_hands.append(card)
 
                 possible_hands.sort(key = lambda x: x.points, reverse = True)
-                played_card = possible_hands[1]
+                played_card = possible_hands[-1]
 
         if action == 0:
             possible_hands = []
