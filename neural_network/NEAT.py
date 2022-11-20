@@ -172,6 +172,6 @@ while True:
         eval_array.append(new_eval_member)
         np.save("eval_array.npy", eval_array)
 
-    np.save("Generation_" + str(counter) + ".npy", np.array([G.species]))
+    np.save("Generation_" + str(counter) + ".npy", np.array(G))
 
     counter += 1
