@@ -144,6 +144,10 @@ while True:
             dad = s.members[np.random.randint(0, len(s.members))]
             s.breed(mom, dad, G)
 
+        for member in s.members:
+            member.fitness = 0
+            member.adjusted_fitness = 0
+
     s = G.species[np.random.randint(0, len(G.species))]
     m = s.members[np.random.randint(0, len(s.members))]
 
