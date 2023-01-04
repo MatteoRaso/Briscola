@@ -23,8 +23,8 @@ def briscola_game(player_1, player_2):
     player_2.hand = playing_deck[3:6]
     player_1.points = 0
     player_2.points = 0
-    card_1 = player_1.play_card(player_2)
-    card_2 = player_2.play_card(player_1)
+    card_1 = player_1.play_card(player_2, briscola)
+    card_2 = player_2.play_card(player_1, briscola)
     del playing_deck[0:6]
     player_1, player_2 = better_card(card_1, card_2, player_1, player_2, briscola)
     player_1.hand.remove(card_1)
@@ -37,8 +37,8 @@ def briscola_game(player_1, player_2):
             playing_deck.pop(0)
             player_2.hand.append(playing_deck[0])
             playing_deck.pop(0)
-            card_1 = player_1.play_card(player_2)
-            card_2 = player_2.play_card(player_1)
+            card_1 = player_1.play_card(player_2, briscola)
+            card_2 = player_2.play_card(player_1, briscola)
             player_1, player_2 = better_card(card_1, card_2, player_1, player_2, briscola)
 
         else:
@@ -46,8 +46,8 @@ def briscola_game(player_1, player_2):
             playing_deck.pop(0)
             player_1.hand.append(playing_deck[0])
             playing_deck.pop(0)
-            card_1 = player_1.play_card(player_2)
-            card_2 = player_2.play_card(player_1)
+            card_1 = player_1.play_card(player_2, briscola)
+            card_2 = player_2.play_card(player_1, briscola)
             player_2, player_1 = better_card(card_1, card_2, player_2, player_1, briscola)
 
         player_1.hand.remove(card_1)

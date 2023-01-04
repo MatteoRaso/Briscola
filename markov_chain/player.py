@@ -160,16 +160,18 @@ class player():
             if i % 1000 == 0:
                 print(i)
 
-    def play_card(self, opponent):
+    def play_card(self, opponent, briscola):
         state = int(120 + self.points - opponent.points)
-        if self.hand[0].suit == "B" and self.hand[1].suit == "B" and self.hand[2].suit == "B":
+        if self.hand[0].suit == briscola and self.hand[1].suit == briscola and self.hand[2].suit == briscola:
             action = self.policy_1[state]
             print(action)
 
-        elif (self.hand[0].suit == "B" and self.hand[1].suit == "B") or (self.hand[0].suit == "B" and self.hand[2].suit == "B") or (self.hand[1].suit == "B" and self.hand[2].suit == "B"):
+        elif ((self.hand[0].suit == briscola and self.hand[1].suit == briscola)
+          or (self.hand[0].suit == briscola and self.hand[2].suit == briscola)
+          or (self.hand[1].suit == briscola and self.hand[2].suit == briscola)):
             action = self.policy_2[state]
 
-        elif (self.hand[0].suit == "B") or (self.hand[1].suit == "B") or (self.hand[2].suit == "B"):
+        elif (self.hand[0].suit == briscola) or (self.hand[1].suit == briscola) or (self.hand[2].suit == briscola):
             action = self.policy_3[state]
 
         else:
@@ -178,7 +180,7 @@ class player():
         if action == 0:
             possible_hands = []
             for card in self.hand:
-                if card.suit == "B":
+                if card.suit == briscola:
                     possible_hands.append(card)
 
             possible_hands.sort(key = lambda x: x.points, reverse = True)
@@ -187,7 +189,7 @@ class player():
         elif action == 1:
             possible_hands = []
             for card in self.hand:
-                if card.suit == "B":
+                if card.suit == briscola:
                     possible_hands.append(card)
 
             possible_hands.sort(key = lambda x: x.points, reverse = True)
@@ -196,7 +198,7 @@ class player():
         elif action == 2:
             possible_hands = []
             for card in self.hand:
-                if card.suit != "B":
+                if card.suit != briscola:
                     possible_hands.append(card)
 
             possible_hands.sort(key = lambda x: x.points, reverse = True)
@@ -205,7 +207,7 @@ class player():
         else:
             possible_hands = []
             for card in self.hand:
-                if card.suit != "B":
+                if card.suit != briscola:
                     possible_hands.append(card)
 
             possible_hands.sort(key = lambda x: x.points, reverse = True)
