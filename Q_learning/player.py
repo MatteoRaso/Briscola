@@ -16,7 +16,7 @@ class player():
         #If they have the better hand
         self.best = False
         #Maps state_array and action to Q value
-        self.Q_values = {}
+        self.Q_values = {(120, 0): 1000}
         self.gamma = 0
         self.learning_rate = 0
 
@@ -26,7 +26,7 @@ class player():
 
         for i in range(0, 4):
             try:
-                candidate = key
+                candidate = key.copy()
                 candidate.append(i)
                 Q = self.Q_values[tuple(candidate)]
                 if Q > best_Q:
@@ -41,6 +41,7 @@ class player():
     def learn(self, reward, new_state, current_action):
         key = self.state_array.copy()
         key.append(current_action)
+
         if len(self.state_array) < 5:
             new_state_array = self.state_array.copy()
 
@@ -55,6 +56,7 @@ class player():
         best_action = self.get_best_action(new_state_array)
         if best_action == -1:
             new_key = new_state_array.append(0)
+            print(new_key)
             self.Q_values[tuple(new_key)] = 1000
 
         else:
