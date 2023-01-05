@@ -62,8 +62,7 @@ class player():
             next_Q = self.Q_values[new_key]
 
         current_Q = self.Q_values[key]
-        self.Q_values[key] = current_Q + self.learning_rate *
-                            (reward + self.gamma * next_Q - current_Q)
+        self.Q_values[key] = current_Q + self.learning_rate * (reward + self.gamma * next_Q - current_Q)
 
         self.state = new_state_array
 
