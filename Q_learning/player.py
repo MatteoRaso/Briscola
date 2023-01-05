@@ -28,7 +28,7 @@ class player():
             try:
                 candidate = key
                 candidate.append(i)
-                Q = self.Q_values[candidate]
+                Q = self.Q_values[tuple(candidate)]
                 if Q > best_Q:
                     best_Q = Q
                     best_action = i
@@ -50,19 +50,19 @@ class player():
         new_state_array.append(new_state)
 
         if key not in self.Q_values:
-            self.Q_values[key] = 1000
+            self.Q_values[tuple(key)] = 1000
 
         best_action = self.get_best_action(new_state_array)
         if best_action == -1:
             new_key = new_state_array.append(0)
-            self.Q_values[new_key] = 1000
+            self.Q_values[tuple(new_key)] = 1000
 
         else:
             new_key = new_state_array.append(best_action)
-            next_Q = self.Q_values[new_key]
 
-        current_Q = self.Q_values[key]
-        self.Q_values[key] = current_Q + self.learning_rate * (reward + self.gamma * next_Q - current_Q)
+        next_Q = self.Q_values[tuple(new_key)]
+        current_Q = self.Q_values[tuple(key)]
+        self.Q_values[tuple(key)] = current_Q + self.learning_rate * (reward + self.gamma * next_Q - current_Q)
 
         self.state = new_state_array
 
