@@ -49,7 +49,7 @@ class player():
 
         new_state_array.append(new_state)
 
-        if key not in self.Q_values:
+        if tuple(key) not in self.Q_values:
             self.Q_values[tuple(key)] = 1000
 
         best_action = self.get_best_action(new_state_array)
