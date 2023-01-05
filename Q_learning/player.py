@@ -69,61 +69,74 @@ class player():
         self.state = new_state_array
 
     def play_card(self, opponent, briscola):
-        action = max(0, self.get_best_action(self.state_array))
-        played_card = None
+        if len(self.hand) == 0:
+            pass
 
-        if action == 0:
-            possible_hands = []
-            for card in self.hand:
-                if card.suit == briscola:
-                    possible_hands.append(card)
+        else:
+            action = max(0, self.get_best_action(self.state_array))
+            played_card = None
 
-            if len(possible_hands) == 0:
-                action = 3
+            if action == 0:
+                possible_hands = []
+                for card in self.hand:
+                    if card.suit == briscola:
+                        possible_hands.append(card)
 
-            else:
+                if len(possible_hands) == 0:
+                    action = 2
+
+                else:
+                    possible_hands.sort(key = lambda x: x.points, reverse = True)
+                    played_card = possible_hands[0]
+
+            if action == 1:
+                possible_hands = []
+                for card in self.hand:
+                    if card.suit == briscola:
+                        possible_hands.append(card)
+
+                if len(possible_hands) == 0:
+                    action = 2
+
+                else:
+                    possible_hands.sort(key = lambda x: x.points, reverse = True)
+                    played_card = possible_hands[-1]
+
+            if action == 2:
+                possible_hands = []
+                for card in self.hand:
+                    if card.suit != briscola:
+                        possible_hands.append(card)
+
+                if len(possible_hands) == 0:
+                    action = 0
+
+                else:
+                    possible_hands.sort(key = lambda x: x.points, reverse = True)
+                    played_card = possible_hands[0]
+
+            if action == 3:
+                possible_hands = []
+                for card in self.hand:
+                    if card.suit != briscola:
+                        possible_hands.append(card)
+
+                possible_hands.sort(key = lambda x: x.points, reverse = True)
+
+                if len(possible_hands) == 0:
+                    action = 0
+
+                else:
+                    played_card = possible_hands[-1]
+
+            if action == 0:
+                possible_hands = []
+                for card in self.hand:
+                    if card.suit == briscola:
+                        possible_hands.append(card)
+
                 possible_hands.sort(key = lambda x: x.points, reverse = True)
                 played_card = possible_hands[0]
 
-        if action == 1:
-            possible_hands = []
-            for card in self.hand:
-                if card.suit == briscola:
-                    possible_hands.append(card)
+            return played_card
 
-            possible_hands.sort(key = lambda x: x.points, reverse = True)
-            possible_hands[-1]
-
-        if action == 2:
-            possible_hands = []
-            for card in self.hand:
-                if card.suit != briscola:
-                    possible_hands.append(card)
-
-            possible_hands.sort(key = lambda x: x.points, reverse = True)
-            played_card = possible_hands[0]
-
-        if action == 3:
-            possible_hands = []
-            for card in self.hand:
-                if card.suit != briscola:
-                    possible_hands.append(card)
-
-            possible_hands.sort(key = lambda x: x.points, reverse = True)
-
-            if len(possible_hands) == 0:
-                action = 0
-
-            else:
-                played_card = possible_hands[-1]
-
-        if action == 0:
-            possible_hands = []
-            for card in self.hand:
-                if card.suit == briscola:
-                    possible_hands.append(card)
-
-            possible_hands.sort(key = lambda x: x.points, reverse = True)
-            played_card = possible_hands[0]
-
-        return played_card
