@@ -68,6 +68,7 @@ class player():
 
     def play_card(self, opponent, briscola):
         action = max(0, self.get_best_action(self.state_array))
+        played_card = None
 
         if action == 0:
             possible_hands = []
