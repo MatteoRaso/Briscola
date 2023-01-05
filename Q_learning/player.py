@@ -60,7 +60,7 @@ class player():
             self.Q_values[tuple(new_key)] = 1000
 
         else:
-            new_key = new_state_array + list(best_action)
+            new_key = new_state_array + [best_action]
 
         next_Q = self.Q_values[tuple(new_key)]
         current_Q = self.Q_values[tuple(key)]
