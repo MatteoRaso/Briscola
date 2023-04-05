@@ -53,6 +53,24 @@ def briscola_game(player_1, player_2):
         player_1.hand.remove(card_1)
         player_2.hand.remove(card_2)
 
+    for i in range(0, 3):
+        try:
+            if player_1.best:
+                card_1 = player_1.play_card(player_2, briscola)
+                card_2 = player_2.play_card(player_1, briscola)
+                player_1, player_2 = better_card(card_1, card_2, player_1, player_2, briscola)
+
+            else:
+                card_1 = player_1.play_card(player_2, briscola)
+                card_2 = player_2.play_card(player_1, briscola)
+                player_2, player_1 = better_card(card_1, card_2, player_2, player_1, briscola)
+
+            player_1.hand.remove(card_1)
+            player_2.hand.remove(card_2)
+
+        except IndexError:
+            pass
+
     if player_1.points >= player_2.points:
         player_1.wins += 1
 
