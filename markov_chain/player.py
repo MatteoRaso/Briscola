@@ -162,20 +162,24 @@ class player():
 
     def play_card(self, opponent, briscola):
         state = int(120 + self.points - opponent.points)
-        if self.hand[0].suit == briscola and self.hand[1].suit == briscola and self.hand[2].suit == briscola:
-            action = self.policy_1[state]
-            print(action)
+        try:
+            if self.hand[0].suit == briscola and self.hand[1].suit == briscola and self.hand[2].suit == briscola:
+                action = self.policy_1[state]
+                print(action)
 
-        elif ((self.hand[0].suit == briscola and self.hand[1].suit == briscola)
-          or (self.hand[0].suit == briscola and self.hand[2].suit == briscola)
-          or (self.hand[1].suit == briscola and self.hand[2].suit == briscola)):
-            action = self.policy_2[state]
+            elif ((self.hand[0].suit == briscola and self.hand[1].suit == briscola)
+            or (self.hand[0].suit == briscola and self.hand[2].suit == briscola)
+            or (self.hand[1].suit == briscola and self.hand[2].suit == briscola)):
+                action = self.policy_2[state]
 
-        elif (self.hand[0].suit == briscola) or (self.hand[1].suit == briscola) or (self.hand[2].suit == briscola):
-            action = self.policy_3[state]
+            elif (self.hand[0].suit == briscola) or (self.hand[1].suit == briscola) or (self.hand[2].suit == briscola):
+                action = self.policy_3[state]
 
-        else:
-            action = self.policy_4[state]
+            else:
+                action = self.policy_4[state]
+
+        except IndexError:
+            action = 0
 
         if action == 0:
             possible_hands = []
