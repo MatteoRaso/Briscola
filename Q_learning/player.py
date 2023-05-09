@@ -7,6 +7,8 @@ Briscola is distributed in the hope that it will be useful, but WITHOUT ANY WARR
 
 You should have received a copy of the GNU General Public License along with Briscola. If not, see <https://www.gnu.org/licenses/>.
 """
+import numpy as np
+
 class player():
     def _init_(self):
         self.points = 0
@@ -53,14 +55,20 @@ class player():
         if tuple(key) not in self.Q_values:
             self.Q_values[tuple(key)] = 1000
 
-        best_action = self.get_best_action(new_state_array)
+        if np.random.random() < 0.3:
+            action = np.random.choice([0, 1, 2, 3])
 
-        if best_action == -1:
+        else:
+            action = self.get_best_action(new_state_array)
+
+        if action == -1:
             new_key = new_state_array + [0]
             self.Q_values[tuple(new_key)] = 1000
 
         else:
-            new_key = new_state_array + [best_action]
+            new_key = new_state_array + [action]
+            if tuple(new_key) not in self.Q_values:
+                self.Q_values[tuple(new_key)] = 1000
 
         next_Q = self.Q_values[tuple(new_key)]
         current_Q = self.Q_values[tuple(key)]

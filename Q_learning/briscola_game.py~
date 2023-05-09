@@ -79,7 +79,7 @@ def briscola_game(player_1, player_2):
         player_1.hand.remove(card_1)
         player_2.hand.remove(card_2)
 
-    for i in range(0, 2):
+    for i in range(0, 3):
         if player_1.best:
             player_1_action = max(0, player_1.get_best_action(player_1.state_array))
             player_2_action = max(0, player_2.get_best_action(player_2.state_array))
