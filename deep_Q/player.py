@@ -67,7 +67,7 @@ class player():
         return processed_state
 
     def _get_action(self, explore=True):
-        if explore and (self.exploration > np.random.Generator.uniform()):
+        if explore and (self.exploration > self.rng.uniform()):
                 action = self.hand[self.rng.integers(0, 3)].index
 
         else:
@@ -116,12 +116,12 @@ class player():
 
             self.Q.train_on_batch(x, y)
 
-    def play_card(self, opponent, briscola):
+    def play_card(self, opponent, briscola, explore=True):
         if len(self.hand) == 0:
             pass
 
         else:
-            action = self._get_action()
+            action = self._get_action(explore)
             for card in self.hand:
                 if card.index == action:
                     played_card = card
