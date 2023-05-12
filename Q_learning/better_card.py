@@ -33,13 +33,12 @@ def better_card(card_1, card_2, player_1, player_2, briscola):
             player_2.points += total_points
             player_2.best = True
 
-    elif card_1.suit == briscola:
-        player_1.points += total_points
-        player_1.best = True
-
-    else:
-        #Card 2 is a briscola
+    elif card_2.suit == briscola:
         player_2.points += total_points
         player_2.best = True
+
+    else:
+        player_1.points += total_points
+        player_1.best = True
 
     return player_1, player_2
