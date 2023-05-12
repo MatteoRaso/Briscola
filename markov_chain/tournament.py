@@ -18,7 +18,7 @@ for i in range(1, 20):
     players[i - 1]._init_()
     players[i - 1].initialize_policy_and_value()
     players[i - 1].gamma = 0.05 * i
-    players[i - 1].training_iterations = 300000
+    players[i - 1].training_iterations = 150000
     players[i - 1].train()
 
 for i in range(0, len(players)):
