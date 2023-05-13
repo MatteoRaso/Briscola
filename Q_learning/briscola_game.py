@@ -23,8 +23,8 @@ def briscola_game(player_1, player_2):
     player_2.hand = playing_deck[3:6]
     player_1.points = 0
     player_2.points = 0
-    player_1.state_array = [120]
-    player_2.state_array = [120]
+    player_1.state_array = [0]
+    player_2.state_array = [0]
     player_1_action = max(0, player_1.get_best_action(player_1.state_array))
     player_2_action = max(0, player_2.get_best_action(player_2.state_array))
     card_1 = player_1.play_card(player_2, briscola)
